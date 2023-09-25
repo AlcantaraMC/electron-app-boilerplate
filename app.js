@@ -13,7 +13,7 @@ function createMainWindow () {
 
     const mainWindow = new BrowserWindow ({
         title: "Electron Boilerplate Code",
-        width: isDevelopmentEnv ? 1000 : 500,
+        width: isDevelopmentEnv ? 900 : 500,
         height: 500,
         center: true,
     });
