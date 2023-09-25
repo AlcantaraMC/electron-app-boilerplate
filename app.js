@@ -26,6 +26,26 @@ function createMainWindow () {
     mainWindow.loadFile (path.join (__dirname, './renderers/index.html'));
 }
 
+/** create another window for about page */
+function createAboutWindow () {
+
+    const aboutWindow = new BrowserWindow ({
+        title: "Electron Boilerplate Code - About",
+        width: isDevelopmentEnv ? 500 : 500,
+        height: 500,
+        center: true,
+    });
+
+    /** opens the developer tools if isDevelopmentEnv is set to true */
+    // if (isDevelopmentEnv) {
+    //     mainWindow.webContents.openDevTools ();
+    // }
+
+    aboutWindow.loadFile (path.join (__dirname, './renderers/about.html'));
+
+}
+
+
 /** 
  * instantiate the window using the function...
  * returns a promise.
@@ -65,7 +85,17 @@ app
 const menu = [
     {
         role: "fileMenu"
-    }
+    },
+    ...(!isOnMacintosh ? [{
+        label: "Help",
+        submenu: [
+            {
+                label: "About",
+                click: createAboutWindow,
+                accelerator: 'CmdOrCtrl+H'
+            }
+        ]
+    }] : []),
 ];
 
 /** for cross-platform exiting */
