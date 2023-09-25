@@ -7,6 +7,12 @@ const isOnMacintosh = process.platform === 'darwin';
 /** constant to check if the environment is development */
 const isDevelopmentEnv = process.env.NODE_ENV !== 'development';
 
+/** suppress chromium errors */
+// app.commandLine.appendSwitch('ignore-gpu-blacklist');
+// app.commandLine.appendSwitch('disable-gpu');
+// app.commandLine.appendSwitch('disable-gpu-compositing');
+app.disableHardwareAcceleration()
+
 /** create main window using electron */
 function createMainWindow () {
 
