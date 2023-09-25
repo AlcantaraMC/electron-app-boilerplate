@@ -60,6 +60,8 @@ function generateRender ( windowTitle, renderPath, width, height, openDevTools) 
         title: windowTitle,
         width: width,
         height: height,
+        minHeight: 600,
+        minWidth: 1024,
         center: true,
     });
 
@@ -68,6 +70,9 @@ function generateRender ( windowTitle, renderPath, width, height, openDevTools) 
     }
 
     genericWindow.loadFile (path.join (__dirname, `./renderers/${renderPath}`));
+
+    /** start maximized */
+    genericWindow.maximize ();
 }
 
 /** 
@@ -80,9 +85,9 @@ app
         generateRender (
             "Electron Boilerplate Code",
             "index.html",
-            900,
-            500,
-            true
+            1200,
+            600,
+            false
         );
 
         /** add the custom menu */
@@ -95,9 +100,9 @@ app
                 generateRender (
                     "Electron Boilerplate Code",
                     "index.html",
-                    900,
-                    500,
-                    true
+                    1200,
+                    600,
+                    false
                 );
             }
         })
@@ -130,7 +135,7 @@ const menu = [
                 click: () => {
                     generateRender (
                         "About Electron Boilerplate Code",
-                        "index.html",
+                        "about.html",
                         300,
                         300,
                         false
