@@ -1,0 +1,30 @@
+{
+  "name": "electron-app-boilerplate",
+  "version": "1.0.0",
+  "productName": "Electron Boilerplate Code",
+  "description": "Electron Boilerplate Code",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "electron ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MinminRepo/electron-app-boilerplate.git"
+  },
+  "keywords": [
+    "electron",
+    "boilerplate",
+    "javascript"
+  ],
+  "author": "Marvin Alcantara",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MinminRepo/electron-app-boilerplate/issues"
+  },
+  "homepage": "https://github.com/MinminRepo/electron-app-boilerplate#readme",
+  "dependencies": {
+    "electron": "^26.2.2",
+    "toastify-js": "^1.12.0"
+  }
+}
