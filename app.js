@@ -2,16 +2,26 @@ const { create } = require('domain');
 const { app, BrowserWindow } = require ('electron');
 const path = require ('path');
 
+/** constant to check if the OS is Macintosh */
 const isOnMacintosh = process.platform === 'darwin';
+
+/** constant to check if the environment is development */
+const isDevelopmentEnv = process.env.NODE_ENV !== 'development';
 
 /** create main window using electron */
 function createMainWindow () {
 
     const mainWindow = new BrowserWindow ({
         title: "Electron Boilerplate Code",
-        width: 500,
-        height: 600,
+        width: isDevelopmentEnv ? 1000 : 500,
+        height: 500,
+        center: true,
     });
+
+    /** opens the developer tools if isDevelopmentEnv is set to true */
+    if (isDevelopmentEnv) {
+        mainWindow.webContents.openDevTools ();
+    }
 
     mainWindow.loadFile (path.join (__dirname, './renderers/index.html'));
 }
