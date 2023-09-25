@@ -19,3 +19,35 @@ button
 input {
     letter-spacing: 0.5px;
 }
+
+/* theming */
+
+/* body {
+    background-color: #333;
+}
+
+h1, h2, h3, h4, h5, h6, a, p, label, hr {
+    color: #ccc;
+}
+
+.form-control {
+    border-radius: 0;
+    background-color: #333;
+    color: #ccc;
+}
+
+.btn {
+    font-family: 'Poppins';
+    border-radius: 0;
+    letter-spacing: 0.7px;
+    border: 0;
+}
+
+.btn-primary {
+    background-color: #111;
+}
+
+.btn-primary:hover {
+    background-color: orange;
+    color: #111;
+} */
