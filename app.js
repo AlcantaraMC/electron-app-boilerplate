@@ -48,16 +48,23 @@ app
     });
 
 /** customizing the menu */
+// const menu = [
+//     {
+//         label: "File",
+//         submenu: [
+//             {
+//                 label: "Quit",
+//                 click: () => { app.quit (); },
+//                 accelerator: 'CmdOrCtrl+Q'
+//             }
+//         ]
+//     }
+// ];
+
+/** custom menu using roles */
 const menu = [
     {
-        label: "File",
-        submenu: [
-            {
-                label: "Quit",
-                click: () => { app.quit (); },
-                accelerator: 'CmdOrCtrl+Q'
-            }
-        ]
+        role: "fileMenu"
     }
 ];
 
