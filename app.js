@@ -1,5 +1,5 @@
 const { create } = require('domain');
-const { app, BrowserWindow } = require ('electron');
+const { app, BrowserWindow, Menu } = require ('electron');
 const path = require ('path');
 
 /** constant to check if the OS is Macintosh */
@@ -35,6 +35,10 @@ app
     .then (() => {
         createMainWindow ();
 
+        /** add the custom menu */
+        const mainMenu = Menu.buildFromTemplate (menu);
+        Menu.setApplicationMenu (mainMenu);
+
         /** checks if there are no active windows, if true, creates a window */
         app.on ('activate', () => {
             if (BrowserWindow.getAllWindows ().length === 0) {
@@ -43,6 +47,19 @@ app
         })
     });
 
+/** customizing the menu */
+const menu = [
+    {
+        label: "File",
+        submenu: [
+            {
+                label: "Quit",
+                click: () => { app.quit (); },
+                accelerator: 'CmdOrCtrl+Q'
+            }
+        ]
+    }
+];
 
 /** for cross-platform exiting */
 app.on ('window-all-closed', () => {
