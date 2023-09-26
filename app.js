@@ -11,74 +11,20 @@ const isDevelopmentEnv = process.env.NODE_ENV !== 'development';
 // app.commandLine.appendSwitch('ignore-gpu-blacklist');
 // app.commandLine.appendSwitch('disable-gpu');
 // app.commandLine.appendSwitch('disable-gpu-compositing');
-app.disableHardwareAcceleration()
+app.disableHardwareAcceleration();
 
 /** create main window using electron */
-function createMainWindow () {
 
-    const mainWindow = new BrowserWindow ({
-        title: "Electron Boilerplate Code",
-        width: isDevelopmentEnv ? 900 : 500,
-        height: 500,
-        center: true,
-    });
+function generateRender (rendererPath, settingsObj) {
 
-    /** opens the developer tools if isDevelopmentEnv is set to true */
-    if (isDevelopmentEnv) {
-        mainWindow.webContents.openDevTools ();
-    }
+    const genericWindow = new BrowserWindow( settingsObj );
 
-    mainWindow.loadFile (path.join (__dirname, './renderers/index.html'));
-}
-
-/** create another window for about page */
-function createAboutWindow () {
-
-    const aboutWindow = new BrowserWindow ({
-        title: "Electron Boilerplate Code - About",
-        width: isDevelopmentEnv ? 500 : 500,
-        height: 500,
-        center: true,
-    });
-
-    /** opens the developer tools if isDevelopmentEnv is set to true */
-    // if (isDevelopmentEnv) {
-    //     mainWindow.webContents.openDevTools ();
-    // }
-
-    aboutWindow.loadFile (path.join (__dirname, './renderers/about.html'));
-
-}
-
-/**
- * THIS FUNCTION IS A GENERAL PURPOSE FUNCTION FOR 
- * INSTANTIATING WINDOWS
- * 
- * @param {string} windowTitle : the title to display on the window title bar 
- * @param {string} renderPath : the HTML file or URL to render in the window
- * @param {int} width : the width of the window
- * @param {int} height : the height of the window 
- * @param {boolean} openDevTools : opens the devtools if set true, hides otherwise 
- */
-function generateRender ( windowTitle, renderPath, width, height, openDevTools) {
-
-    const genericWindow = new BrowserWindow ({
-        title: windowTitle,
-        width: width,
-        height: height,
-        minHeight: 600,
-        minWidth: 1024,
-        center: true,
-    });
-
-    if (openDevTools) {
-        genericWindow.webContents.openDevTools ();
-    }
-
-    genericWindow.loadFile (path.join (__dirname, `./renderers/${renderPath}`));
+    genericWindow.loadFile (path.join (__dirname, `./renderers/${rendererPath}`));
 
     /** start maximized */
-    genericWindow.maximize ();
+    if (settingsObj.title === "Electron Boilerplate Code") {
+        genericWindow.maximize ();
+    }
 }
 
 /** 
@@ -88,13 +34,10 @@ function generateRender ( windowTitle, renderPath, width, height, openDevTools) 
 app
     .whenReady ()
     .then (() => {
-        generateRender (
-            "Electron Boilerplate Code",
-            "index.html",
-            1200,
-            600,
-            false
-        );
+        generateRender ("index.html", {
+            title: "Electron Boilerplate Code",
+            center: true,
+        });
 
         /** add the custom menu */
         const mainMenu = Menu.buildFromTemplate (menu);
@@ -103,13 +46,10 @@ app
         /** checks if there are no active windows, if true, creates a window */
         app.on ('activate', () => {
             if (BrowserWindow.getAllWindows ().length === 0) {
-                generateRender (
-                    "Electron Boilerplate Code",
-                    "index.html",
-                    1200,
-                    600,
-                    false
-                );
+                generateRender ("index.html", {
+                    title: "Electron Boilerplate Code",
+                    center: true,
+                });
             }
         })
     });
@@ -139,13 +79,11 @@ const menu = [
             {
                 label: "About",
                 click: () => {
-                    generateRender (
-                        "About Electron Boilerplate Code",
-                        "about.html",
-                        300,
-                        300,
-                        false
-                    );
+                    generateRender ("about.html", {
+                        title: "About | Electron Boilerplate Code",
+                        width: 300,
+                        height: 300,
+                    });
                 },
                 accelerator: 'CmdOrCtrl+H'
             }
