@@ -18,8 +18,9 @@ app.disableHardwareAcceleration();
 function generateRender (rendererPath, settingsObj) {
 
     const genericWindow = new BrowserWindow( settingsObj );
-
     genericWindow.loadFile (path.join (__dirname, `./renderers/${rendererPath}`));
+
+    genericWindow.webContents.openDevTools ();
 
     /** start maximized */
     if (settingsObj.title === "Electron Boilerplate Code") {
@@ -37,6 +38,11 @@ app
         generateRender ("index.html", {
             title: "Electron Boilerplate Code",
             center: true,
+            webPreferences: {
+                preload: path.join ( __dirname, "preload.js" ),
+                contextIsolation: true,
+                nodeIntegration: true
+            },
         });
 
         /** add the custom menu */
@@ -49,6 +55,11 @@ app
                 generateRender ("index.html", {
                     title: "Electron Boilerplate Code",
                     center: true,
+                    webPreferences: {
+                        preload: path.join ( __dirname, "preload.js" ),
+                        contextIsolation: true,
+                        nodeIntegration: true
+                    },
                 });
             }
         })
@@ -83,6 +94,8 @@ const menu = [
                         title: "About | Electron Boilerplate Code",
                         width: 300,
                         height: 300,
+                        minimizable: false,
+                        maximizable: false,
                     });
                 },
                 accelerator: 'CmdOrCtrl+H'
